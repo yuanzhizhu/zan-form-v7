@@ -260,4 +260,8 @@ zanFormCore.register("FormDateRangeQuickPickerField", zent.FormDateRangeQuickPic
 zanFormCore.register("FormCheckboxGroupField", FormCheckboxGroupField);
 zanFormCore.register("FormRadioGroupField", FormRadioGroupField);
 
+zanFormCore.howToGetValues = function (formInstance) {
+  return formInstance.getValue();
+};
+
 module.exports = zanFormCore;

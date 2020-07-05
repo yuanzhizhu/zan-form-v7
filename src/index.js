@@ -40,4 +40,8 @@ zanFormCore.register(
 zanFormCore.register("FormCheckboxGroupField", FormCheckboxGroupField);
 zanFormCore.register("FormRadioGroupField", FormRadioGroupField);
 
+zanFormCore.howToGetValues = formInstance => {
+  return formInstance.getValue();
+};
+
 export default zanFormCore;
