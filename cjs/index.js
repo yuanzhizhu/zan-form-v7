@@ -258,48 +258,6 @@ zanFormCore.register("FormTimeRangePickerField", zent.FormTimeRangePickerField);
 zanFormCore.register("FormDateRangePickerField", zent.FormDateRangePickerField);
 zanFormCore.register("FormDateRangeQuickPickerField", zent.FormDateRangeQuickPickerField);
 zanFormCore.register("FormCheckboxGroupField", FormCheckboxGroupField);
-zanFormCore.register("FormRadioGroupField", FormRadioGroupField); // 为props增加validator
-
-var addValidator = function addValidator(props) {
-  props.validations = props.validations || {};
-  props.validationErrors = props.validationErrors || {};
-
-  if (typeof props.required === "string") {
-    var requiredText = props.required;
-    props.required = true;
-    props.validations.required = true;
-    props.validationErrors.required = requiredText;
-  } else if (props.required === true) {
-    props.required = true;
-  } else if (props.required === false) {
-    props.required = false;
-  }
-};
-
-var setValues = function setValues(data, formInstance, callback) {
-  if (data) {
-    var zentForm = formInstance.props.zentForm;
-    var prevValues = null;
-
-    var setValuesAsync = function setValuesAsync() {
-      return setTimeout(function () {
-        var values = zentForm.getFormValues();
-
-        if (JSON.stringify(prevValues) !== JSON.stringify(values)) {
-          prevValues = values;
-          zentForm.setFieldsValue(data);
-          setValuesAsync();
-        } else {
-          callback && callback();
-        }
-      }, 0);
-    };
-
-    setValuesAsync();
-  }
-};
-
-zanFormCore.setValues = setValues;
-zanFormCore.onProps = addValidator;
+zanFormCore.register("FormRadioGroupField", FormRadioGroupField);
 
 module.exports = zanFormCore;

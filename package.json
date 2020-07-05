@@ -1,6 +1,6 @@
 {
   "name": "zan-form-v7",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "zan-form-v7",
   "main": "cjs/index.js",
   "module": "es/index.js",
