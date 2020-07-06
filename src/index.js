@@ -18,6 +18,7 @@ import {
 } from "zent";
 import FormCheckboxGroupField from "./FormCheckboxGroupField";
 import FormRadioGroupField from "./FormRadioGroupField";
+import formDirtyCheck from "./formDirtyCheck";
 
 zanFormCore.onProps = () => {};
 zanFormCore.howToGetValues = formInstance => {
@@ -40,6 +41,8 @@ zanFormCore.mapDecoratorStateToProps = {
     props.props.data = data;
   }
 };
+
+zanFormCore.formDirtyCheck = formDirtyCheck;
 
 zanFormCore.register("FormInputField", FormInputField);
 zanFormCore.register("FormSelectField", FormSelectField);

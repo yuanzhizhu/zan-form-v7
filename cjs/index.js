@@ -184,7 +184,7 @@ var FormCheckboxGroupField = /*#__PURE__*/function (_React$Component) {
             text = item.text,
             restProps = _objectWithoutProperties(item, ["value", "text"]);
 
-        return /*#__PURE__*/React.createElement(Checkbox, _extends({}, restProps, {
+        return /*#__PURE__*/React.createElement(zent.Checkbox, _extends({}, restProps, {
           key: index,
           value: value
         }), text);
@@ -219,7 +219,7 @@ var FormRadioGroupField = /*#__PURE__*/function (_React$Component) {
             text = item.text,
             restProps = _objectWithoutProperties(item, ["value", "text"]);
 
-        return /*#__PURE__*/React.createElement(Radio, _extends({}, restProps, {
+        return /*#__PURE__*/React.createElement(zent.Radio, _extends({}, restProps, {
           key: index,
           value: value
         }), text);
@@ -231,6 +231,80 @@ var FormRadioGroupField = /*#__PURE__*/function (_React$Component) {
 
   return FormRadioGroupField;
 }(React.Component);
+
+var loop = function loop(fn) {
+  var next = function next() {
+    return fn(next);
+  };
+
+  return fn(next);
+};
+
+var formDirtyCheck = function formDirtyCheck(FormComponent) {
+  var NewFormComponent = /*#__PURE__*/function (_React$Component) {
+    _inherits(NewFormComponent, _React$Component);
+
+    var _super = _createSuper(NewFormComponent);
+
+    function NewFormComponent(props) {
+      var _this;
+
+      _classCallCheck(this, NewFormComponent);
+
+      _this = _super.call(this, props);
+
+      _defineProperty(_assertThisInitialized(_this), "getFormInstance", function (_form) {
+        _this.form = _form;
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
+        _this.started = true;
+
+        _this.dirtyCheck();
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "componentWillUnmount", function () {
+        _this.started = false;
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "dirtyCheck", function () {
+        loop(function (next) {
+          if (_this.started === true) {
+            var formData = JSON.stringify(_this.form.getValue());
+
+            if (formData !== _this.oldFormData) {
+              _this.oldFormData = formData;
+
+              _this.forceUpdate(function () {
+                setTimeout(function () {
+                  next();
+                }, 200);
+              });
+            } else {
+              setTimeout(function () {
+                next();
+              }, 200);
+            }
+          }
+        });
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "render", function () {
+        return /*#__PURE__*/React.createElement(FormComponent, _extends({}, _this.props, {
+          getFormInstance: _this.getFormInstance
+        }));
+      });
+
+      _this.oldFormData = JSON.stringify({});
+      _this.started = false;
+      return _this;
+    }
+
+    return NewFormComponent;
+  }(React.Component);
+
+  return NewFormComponent;
+};
 
 zanFormCore.onProps = function () {};
 
@@ -256,6 +330,7 @@ zanFormCore.mapDecoratorStateToProps = {
     props.props.data = data;
   }
 };
+zanFormCore.formDirtyCheck = formDirtyCheck;
 zanFormCore.register("FormInputField", zent.FormInputField);
 zanFormCore.register("FormSelectField", zent.FormSelectField);
 zanFormCore.register("FormCheckboxField", zent.FormCheckboxField);

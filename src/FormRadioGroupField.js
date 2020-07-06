@@ -1,5 +1,5 @@
 import React from "react";
-import { FormRadioGroupField as OldFormRadioGroupField } from "zent";
+import { FormRadioGroupField as OldFormRadioGroupField, Radio } from "zent";
 
 class FormRadioGroupField extends React.Component {
   render = () => {

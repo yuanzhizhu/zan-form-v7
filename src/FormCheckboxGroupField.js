@@ -1,5 +1,5 @@
 import React from "react";
-import { FormCheckboxGroupField as OldFormCheckboxGroupField } from "zent";
+import { FormCheckboxGroupField as OldFormCheckboxGroupField, Checkbox } from "zent";
 
 class FormCheckboxGroupField extends React.Component {
   render = () => {
