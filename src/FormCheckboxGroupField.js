@@ -3,11 +3,9 @@ import { FormCheckboxGroupField as OldFormCheckboxGroupField } from "zent";
 
 class FormCheckboxGroupField extends React.Component {
   render = () => {
-    let { data = [], ...restProps } = this.props;
-
     return (
-      <OldFormCheckboxGroupField value={[]} {...restProps}>
-        {data.map((item, index) => {
+      <OldFormCheckboxGroupField value={[]} {...this.props}>
+        {this.props.props.data.map((item, index) => {
           const { value, text, ...restProps } = item;
 
           return (

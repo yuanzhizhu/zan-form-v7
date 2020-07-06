@@ -3,11 +3,9 @@ import { FormRadioGroupField as OldFormRadioGroupField } from "zent";
 
 class FormRadioGroupField extends React.Component {
   render = () => {
-    let { data = [], ...restProps } = this.props;
-
     return (
-      <OldFormRadioGroupField {...restProps}>
-        {data.map((item, index) => {
+      <OldFormRadioGroupField {...this.props}>
+        {this.props.props.data.map((item, index) => {
           const { value, text, ...restProps } = item;
 
           return (

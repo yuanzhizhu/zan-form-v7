@@ -177,14 +177,9 @@ var FormCheckboxGroupField = /*#__PURE__*/function (_React$Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      var _this$props = _this.props,
-          _this$props$data = _this$props.data,
-          data = _this$props$data === void 0 ? [] : _this$props$data,
-          restProps = _objectWithoutProperties(_this$props, ["data"]);
-
       return /*#__PURE__*/React.createElement(zent.FormCheckboxGroupField, _extends({
         value: []
-      }, restProps), data.map(function (item, index) {
+      }, _this.props), _this.props.props.data.map(function (item, index) {
         var value = item.value,
             text = item.text,
             restProps = _objectWithoutProperties(item, ["value", "text"]);
@@ -219,12 +214,7 @@ var FormRadioGroupField = /*#__PURE__*/function (_React$Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      var _this$props = _this.props,
-          _this$props$data = _this$props.data,
-          data = _this$props$data === void 0 ? [] : _this$props$data,
-          restProps = _objectWithoutProperties(_this$props, ["data"]);
-
-      return /*#__PURE__*/React.createElement(zent.FormRadioGroupField, restProps, data.map(function (item, index) {
+      return /*#__PURE__*/React.createElement(zent.FormRadioGroupField, _this.props, _this.props.props.data.map(function (item, index) {
         var value = item.value,
             text = item.text,
             restProps = _objectWithoutProperties(item, ["value", "text"]);
@@ -242,6 +232,30 @@ var FormRadioGroupField = /*#__PURE__*/function (_React$Component) {
   return FormRadioGroupField;
 }(React.Component);
 
+zanFormCore.onProps = function () {};
+
+zanFormCore.howToGetValues = function (formInstance) {
+  return formInstance.getValue();
+};
+
+zanFormCore.howToSetValues = function (formInstance, data) {
+  return formInstance.patchValue(data);
+};
+
+zanFormCore.mapDecoratorStateToProps = {
+  get: function get(props) {
+    if (props.props && props.props.data) {
+      return props.props.data;
+    }
+  },
+  set: function set(props, data) {
+    if (!props.props) {
+      props.props = {};
+    }
+
+    props.props.data = data;
+  }
+};
 zanFormCore.register("FormInputField", zent.FormInputField);
 zanFormCore.register("FormSelectField", zent.FormSelectField);
 zanFormCore.register("FormCheckboxField", zent.FormCheckboxField);
@@ -259,9 +273,5 @@ zanFormCore.register("FormDateRangePickerField", zent.FormDateRangePickerField);
 zanFormCore.register("FormDateRangeQuickPickerField", zent.FormDateRangeQuickPickerField);
 zanFormCore.register("FormCheckboxGroupField", FormCheckboxGroupField);
 zanFormCore.register("FormRadioGroupField", FormRadioGroupField);
-
-zanFormCore.howToGetValues = function (formInstance) {
-  return formInstance.getValue();
-};
 
 module.exports = zanFormCore;

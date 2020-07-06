@@ -19,6 +19,28 @@ import {
 import FormCheckboxGroupField from "./FormCheckboxGroupField";
 import FormRadioGroupField from "./FormRadioGroupField";
 
+zanFormCore.onProps = () => {};
+zanFormCore.howToGetValues = formInstance => {
+  return formInstance.getValue();
+};
+zanFormCore.howToSetValues = (formInstance, data) => {
+  return formInstance.patchValue(data);
+};
+
+zanFormCore.mapDecoratorStateToProps = {
+  get: props => {
+    if (props.props && props.props.data) {
+      return props.props.data;
+    }
+  },
+  set: (props, data) => {
+    if (!props.props) {
+      props.props = {};
+    }
+    props.props.data = data;
+  }
+};
+
 zanFormCore.register("FormInputField", FormInputField);
 zanFormCore.register("FormSelectField", FormSelectField);
 zanFormCore.register("FormCheckboxField", FormCheckboxField);
@@ -39,9 +61,5 @@ zanFormCore.register(
 );
 zanFormCore.register("FormCheckboxGroupField", FormCheckboxGroupField);
 zanFormCore.register("FormRadioGroupField", FormRadioGroupField);
-
-zanFormCore.howToGetValues = formInstance => {
-  return formInstance.getValue();
-};
 
 export default zanFormCore;
