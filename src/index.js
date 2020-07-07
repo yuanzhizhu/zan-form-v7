@@ -21,11 +21,17 @@ import FormRadioGroupField from "./FormRadioGroupField";
 import formDirtyCheck from "./formDirtyCheck";
 
 zanFormCore.onProps = () => {};
-zanFormCore.howToGetValues = formInstance => {
+zanFormCore.howToGetFormValues = formInstance => {
   return formInstance.getValue();
 };
-zanFormCore.howToSetValues = (formInstance, data) => {
+zanFormCore.howToSetFormValues = (formInstance, data) => {
   return formInstance.patchValue(data);
+};
+zanFormCore.howToRemoveFormItem = (formInstance, name) => {
+  if (formInstance.model.children[name]) {
+    formInstance.model.removeChild(name);
+  }
+  return null;
 };
 
 zanFormCore.mapDecoratorStateToProps = {

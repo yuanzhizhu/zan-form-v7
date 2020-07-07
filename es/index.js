@@ -304,11 +304,11 @@ var formDirtyCheck = function formDirtyCheck(FormComponent) {
 
 zanFormCore.onProps = function () {};
 
-zanFormCore.howToGetValues = function (formInstance) {
+zanFormCore.howToGetFormValues = function (formInstance) {
   return formInstance.getValue();
 };
 
-zanFormCore.howToSetValues = function (formInstance, data) {
+zanFormCore.howToSetFormValues = function (formInstance, data) {
   return formInstance.patchValue(data);
 };
 
