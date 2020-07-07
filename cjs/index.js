@@ -316,6 +316,14 @@ zanFormCore.howToSetFormValues = function (formInstance, data) {
   return formInstance.patchValue(data);
 };
 
+zanFormCore.howToRemoveFormItem = function (formInstance, name) {
+  if (formInstance.model.children[name]) {
+    formInstance.model.removeChild(name);
+  }
+
+  return null;
+};
+
 zanFormCore.mapDecoratorStateToProps = {
   get: function get(props) {
     if (props.props && props.props.data) {
