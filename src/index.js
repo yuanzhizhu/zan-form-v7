@@ -27,11 +27,10 @@ zanFormCore.howToGetFormValues = formInstance => {
 zanFormCore.howToSetFormValues = (formInstance, data) => {
   return formInstance.patchValue(data);
 };
-zanFormCore.howToRemoveFormItem = (formInstance, name) => {
+zanFormCore.beforeRemoveFormItem = (formInstance, name) => {
   if (formInstance.model.children[name]) {
     formInstance.model.removeChild(name);
   }
-  return null;
 };
 
 zanFormCore.mapDecoratorStateToProps = {
